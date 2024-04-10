@@ -57,6 +57,7 @@ as it will echo the flag.txt into the file with the name
 After the user can fetch the todo in the UI as they will all be listed there and see the flag
 
 I will prabably have to add a cookie with uuid so you can only get the files that you uploaded and not go to the website and se someone elses flag
+There will also be a need to prevent commands such as rm or ssh etc. I will probably make a list of available commands (cat cd ls)
 
 # The difficulty
 The difficulty is set to 0.4.
