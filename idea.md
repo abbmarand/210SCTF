@@ -1,6 +1,7 @@
 # Bun Is the Best Javascript runtime!!
 ### Difficulty: 0.4
 ### Hosted at ctf.rustalytics.com
+### Catagory: Web
 # The Idea
 The idea is to use the new Javascript runtime [Bun](https://bun.sh/) where they have a way to excecute shell commands trough js which I think is a bad idea from many perspectives
 
@@ -58,4 +59,8 @@ After the user can fetch the todo in the UI as they will all be listed there and
 I will prabably have to add a cookie with uuid so you can only get the files that you uploaded and not go to the website and se someone elses flag
 
 # The difficulty
-The difficulty is set to 0.4. This is because we have during our time at Hitachigymnasiet learned about request types and we know how to manipulate them. Most of us have also done a course in linux which will have given us the knowledge to do the cat command and understand how the server would write todos in the filesystem from the hints
+The difficulty is set to 0.4.
+
+This is because we have during our time at Hitachigymnasiet learned about request types and we know how to manipulate them. 
+
+Most of us have also done a course in linux which will have given us the knowledge to do the cat command and understand how the server would write todos in the filesystem from the hints
