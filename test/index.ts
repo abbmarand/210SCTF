@@ -6,29 +6,39 @@ app.use(express.json())
 async function getfiles () {
     const data = []
     const files = (await $`ls files`.text()).trim().split("\n")
-    console.log(files)
     for (const file of files) {
-        const content = await $`cat files/${file}`
+        const content = await $`cat files/${file}`.text()
         data.push({ file, content })
     }
     return data
 }
 
 
-app.post('/createfile', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/createtodo', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
-        console.log(req.body)
         const { name, content } = req.body
-        const test = await $`touch files/${name}`.text()
-        const text = await $`echo ${content} > files/${name}`.text()
-        res.send(test)
+        const part1 = await $`touch files/${name}`.text()
+        const part2 = await $` echo ${content} > files/${name}`.text()
+        res.send(part2)
     } catch (error) {
-        res.send("test")
+        res.send("error")
     }
 
 })
 
-app.get('/getfiles', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/gettodo', async (req: any, res: { send: (arg0: string) => void }) => {
+    try {
+        const { name } = req.body
+        const file = await $` cat ${name}`.text()
+        res.send(file)
+    } catch (error) {
+        res.send("error")
+    }
+
+})
+
+
+app.get('/gettodos', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         const data = await getfiles()
         res.send(JSON.stringify(data))
