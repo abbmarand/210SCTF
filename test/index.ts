@@ -1,14 +1,18 @@
 import { $ } from "bun"
 import express from 'express'
+import cors from 'cors'
 const app = express()
 const port = 3000
 app.use(express.json())
+app.use(cors())
 async function getfiles () {
     const data = []
     const files = (await $`ls files`.text()).trim().split("\n")
-    for (const file of files) {
-        const content = await $`cat files/${file}`.text()
-        data.push({ file, content })
+    if (files.length > 0) {
+        for (const file of files) {
+            const content = await $`cat files/${file}`.text()
+            data.push({ file, content })
+        }
     }
     return data
 }
@@ -17,6 +21,7 @@ async function getfiles () {
 app.post('/createtodo', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         const { name, content } = req.body
+        console.log(req.body)
         const part1 = await $`touch files/${name}`.text()
         const part2 = await $` echo ${content} > files/${name}`.text()
         res.send(part2)
@@ -43,6 +48,7 @@ app.get('/gettodos', async (req: any, res: { send: (arg0: string) => void }) => 
         const data = await getfiles()
         res.send(JSON.stringify(data))
     } catch (error) {
+        console.log(error)
         res.send("error")
     }
 
