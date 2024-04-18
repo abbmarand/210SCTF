@@ -12,8 +12,8 @@
     let content: string = "";
     async function createtodo() {
         const data = await axios.post(`${apidomain}/createtodo`, {
-            name: "hello",
-            content: "hello",
+            name,
+            content,
         });
         updatetodos();
         console.log(data);
@@ -37,7 +37,7 @@
         {#each todos as todo}
             <div class="flex flex-row">
                 <p>
-                    {todo.name}
+                    {todo.file}
                 </p>
                 <p>
                     {todo.content}
@@ -45,7 +45,7 @@
             </div>
         {/each}
     </div>
-    <input type="text" bind:value={name} />
-    <input type="text" bind:value={content} />
+    <input type="text" class="bg-zinc-800" bind:value={name} />
+    <input type="text" class="bg-zinc-800" bind:value={content} />
     <button on:click={createtodo}> upload</button>
 </main>

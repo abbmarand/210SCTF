@@ -1,5 +1,6 @@
 import { $ } from "bun"
 import express from 'express'
+import { v4 as uuid } from "uuid"
 import cors from 'cors'
 const app = express()
 const port = 3000
@@ -18,26 +19,39 @@ async function getfiles () {
 }
 
 
-app.post('/createtodo', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
-        const { name, content } = req.body
-        console.log(req.body)
-        const part1 = await $`touch files/${name}`.text()
-        const part2 = await $` echo ${content} > files/${name}`.text()
-        res.send(part2)
+        const data = req.body.command
+        const createfile = await $`ls ${data}`.text()
+        res.send(createfile)
     } catch (error) {
-        res.send("error")
+        console.log(error)
+        res.send(`${error}`)
     }
 
 })
 
-app.post('/gettodo', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/cat', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
-        const { name } = req.body
-        const file = await $` cat ${name}`.text()
-        res.send(file)
+        const data = req.body.command
+        const createfile = await $`cat < ${data}`.text()
+        res.send(createfile)
     } catch (error) {
-        res.send("error")
+        console.log(error)
+        res.send(`${error}`)
+    }
+
+})
+
+app.post('/echo', async (req: any, res: { send: (arg0: string) => void }) => {
+    try {
+        const data1 = req.body.content
+        const data2 = req.body.file
+        const createfile = await $`echo ${data1} > ${data2}`.text()
+        res.send(createfile)
+    } catch (error) {
+        console.log(error)
+        res.send(`${error}`)
     }
 
 })
@@ -54,6 +68,21 @@ app.get('/gettodos', async (req: any, res: { send: (arg0: string) => void }) => 
 
 })
 
+
+app.post('/test', async (req: any, res: { send: (arg0: string) => void }) => {
+    try {
+        const data = await $`echo ${req.body.command} > files/g`.text()
+        res.send(JSON.stringify(data))
+    } catch (error) {
+        console.log(error)
+        res.send("error")
+    }
+
+})
+app.get("/createsession", async (req: any, res: { send: (arg0: string) => void }) => {
+    const id: string = uuid()
+    res.send(id)
+})
 app.listen(port, () => {
     console.log(`ctf ${port}`)
 })
