@@ -8,23 +8,27 @@
     if (!dev) {
         apidomain = "ctfdb.rustalytics.com";
     }
-    let name: string = "";
+    let file: string = "";
     let content: string = "";
     async function createtodo() {
-        const data = await axios.post(`${apidomain}/createtodo`, {
-            name,
+        console.log("creating")
+        const data = await axios.post(`${apidomain}/echo`, {
+            file,
             content,
         });
         updatetodos();
         console.log(data);
-        name = "";
+        file = "";
         content = "";
     }
     async function updatetodos() {
-        const data = await axios.get(`${apidomain}/gettodos`);
-        if (data) {
-            todos = data.data;
+        const files = (await axios.post(`${apidomain}/ls`, {"command":"files"})).data.split("\n")
+        for (const file of files){
+            const content = (await axios.post(`${apidomain}/cat`, {"command":file})).data
+            todos.push({file, content})
+            todos = todos
         }
+        console.log(files)
     }
     onMount(async () => {
         updatetodos();
@@ -45,7 +49,7 @@
             </div>
         {/each}
     </div>
-    <input type="text" class="bg-zinc-800" bind:value={name} />
+    <input type="text" class="bg-zinc-800" bind:value={file} />
     <input type="text" class="bg-zinc-800" bind:value={content} />
     <button on:click={createtodo}> upload</button>
 </main>

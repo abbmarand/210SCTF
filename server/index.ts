@@ -34,8 +34,13 @@ app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
 app.post('/cat', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         const data = req.body.command
-        const createfile = await $`cat < ${data}`.text()
-        res.send(createfile)
+        if(data!==""){
+            const createfile = await $`cat < files/${data}`.text()
+            res.send(createfile)
+        }else{
+            res.send("")
+        }
+        
     } catch (error) {
         console.log(error)
         res.send(`${error}`)
@@ -47,7 +52,7 @@ app.post('/echo', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         const data1 = req.body.content
         const data2 = req.body.file
-        const createfile = await $`echo ${data1} > ${data2}`.text()
+        const createfile = await $`echo ${data1} > files/${data2}`.text()
         res.send(createfile)
     } catch (error) {
         console.log(error)
@@ -56,29 +61,6 @@ app.post('/echo', async (req: any, res: { send: (arg0: string) => void }) => {
 
 })
 
-
-app.get('/gettodos', async (req: any, res: { send: (arg0: string) => void }) => {
-    try {
-        const data = await getfiles()
-        res.send(JSON.stringify(data))
-    } catch (error) {
-        console.log(error)
-        res.send("error")
-    }
-
-})
-
-
-app.post('/test', async (req: any, res: { send: (arg0: string) => void }) => {
-    try {
-        const data = await $`echo ${req.body.command} > files/g`.text()
-        res.send(JSON.stringify(data))
-    } catch (error) {
-        console.log(error)
-        res.send("error")
-    }
-
-})
 app.get("/createsession", async (req: any, res: { send: (arg0: string) => void }) => {
     const id: string = uuid()
     res.send(id)
