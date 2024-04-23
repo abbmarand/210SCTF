@@ -11,7 +11,7 @@ app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
             const data = req.body.path
-            const createfile = await $`ls ${req.query.auth}`.text()
+            const createfile = await $`ls ${req.query.auth}/${data}`.text()
             res.send(createfile)
         }else{
             res.send("noauth")

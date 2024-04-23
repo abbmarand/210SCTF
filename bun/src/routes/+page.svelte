@@ -28,7 +28,7 @@
     }
     async function updatetodos() {
         let newtodos = []
-        let files = await axios.post(`${apidomain}/ls?auth=${Cookies.get("session")}`, {"path":"files"})
+        let files = await axios.post(`${apidomain}/ls?auth=${Cookies.get("session")}`, {"path":"./"})
         if(files.data !==  "noauth"){
             const filearray = files.data.split("\n")
             console.log(files)
