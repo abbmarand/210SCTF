@@ -6,22 +6,10 @@ const app = express()
 const port = 3000
 app.use(express.json())
 app.use(cors())
-async function getfiles () {
-    const data = []
-    const files = (await $`ls files`.text()).trim().split("\n")
-    if (files.length > 0) {
-        for (const file of files) {
-            const content = await $`cat files/${file}`.text()
-            data.push({ file, content })
-        }
-    }
-    return data
-}
-
 
 app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
-        const data = req.body.command
+        const data = req.body.path
         const createfile = await $`ls ${data}`.text()
         res.send(createfile)
     } catch (error) {
@@ -33,7 +21,7 @@ app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
 
 app.post('/cat', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
-        const data = req.body.command
+        const data = req.body.path
         if(data!==""){
             const createfile = await $`cat < files/${data}`.text()
             res.send(createfile)

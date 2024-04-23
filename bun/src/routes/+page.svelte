@@ -11,24 +11,23 @@
     let file: string = "";
     let content: string = "";
     async function createtodo() {
-        console.log("creating")
         const data = await axios.post(`${apidomain}/echo`, {
             file,
             content,
         });
         updatetodos();
-        console.log(data);
         file = "";
         content = "";
     }
     async function updatetodos() {
-        const files = (await axios.post(`${apidomain}/ls`, {"command":"files"})).data.split("\n")
+        let newtodos = []
+        const files = (await axios.post(`${apidomain}/ls`, {"path":"files"})).data.split("\n")
         for (const file of files){
-            const content = (await axios.post(`${apidomain}/cat`, {"command":file})).data
-            todos.push({file, content})
-            todos = todos
+            const content = (await axios.post(`${apidomain}/cat`, {"path":file})).data
+            newtodos.push({file, content})
+      
         }
-        console.log(files)
+        todos = newtodos
     }
     onMount(async () => {
         updatetodos();
