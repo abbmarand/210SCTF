@@ -8,7 +8,9 @@
     let content: string = "";
     let todos: any[] = [];
     if (!dev) {
-        apidomain = "ctfdb.rustalytics.com";
+        
+        apidomain = `http://${window.location.href.split("/")[window.location.href.split("/").length-1].split(":")[0]}:3000`
+        console.log(apidomain)
     }
     async function createtodo() {
         const data = await axios.post(`${apidomain}/echo?auth=${Cookies.get("session")}`, {
