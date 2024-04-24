@@ -3,12 +3,12 @@
     import { onMount } from "svelte";
     import { dev } from "$app/environment";
     import axios, { AxiosHeaders } from "axios";
-    let apidomain = "http://localhost:3000";
+    let apidomain = "http://localhost:3001";
     let file: string = "";
     let content: string = "";
     let todos: any[] = [];
     async function createtodo() {
-        const data = await axios.post(`${apidomain}/echo?auth=${Cookies.get("session")}`, {
+        const data = await axios.post(`${apidomain}/create?auth=${Cookies.get("session")}`, {
             file,
             content,
         });
@@ -25,12 +25,12 @@
     }
     async function updatetodos() {
         let newtodos = []
-        let files = await axios.post(`${apidomain}/ls?auth=${Cookies.get("session")}`, {"path":"./"})
+        let files = await axios.post(`${apidomain}/list?auth=${Cookies.get("session")}`, {"path":"./"})
         if(files.data !==  "noauth"){
             const filearray = files.data.split("\n")
             console.log(files)
             for (const file of filearray){
-                const content = (await axios.post(`${apidomain}/cat?auth=${Cookies.get("session")}`, {"path":file})).data
+                const content = (await axios.post(`${apidomain}/view?auth=${Cookies.get("session")}`, {"path":file})).data
                 newtodos.push({file, content})
             }
             todos = newtodos
@@ -42,10 +42,6 @@
        
     }
     onMount(async () => {
-        if (!dev) {
-        apidomain = window.location.hostname
-        console.log(apidomain)
-    }
         if(Cookies.get("session")){
             console.log(Cookies.get("session"))
             updatetodos();

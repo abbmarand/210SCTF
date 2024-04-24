@@ -7,7 +7,7 @@ const port = 3001
 app.use(express.json())
 app.use(cors())
 const sessions  = new Set()
-app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/list', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
             const data = req.body.path
@@ -24,7 +24,7 @@ app.post('/ls', async (req: any, res: { send: (arg0: string) => void }) => {
 
 })
 
-app.post('/cat', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/view', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
             const data = req.body.path
@@ -46,7 +46,7 @@ app.post('/cat', async (req: any, res: { send: (arg0: string) => void }) => {
 
 })
 
-app.post('/echo', async (req: any, res: { send: (arg0: string) => void }) => {
+app.post('/create', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
             const data1 = req.body.content
