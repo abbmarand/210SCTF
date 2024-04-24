@@ -10,7 +10,7 @@ const sessions  = new Set()
 app.post('/list', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
-            const data = req.body.path
+            const data = req.body.where
             const createfile = await $`ls ${req.query.auth}/${data}`.text() //the /data is not necisary but it makes it easier for the user to browse for the files
             res.send(createfile)
         }else{
@@ -27,7 +27,7 @@ app.post('/list', async (req: any, res: { send: (arg0: string) => void }) => {
 app.post('/view', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
-            const data = req.body.path
+            const data = req.body.todo
             if(data!==""){
                 const createfile = await $`cat < ${req.query.auth}/${data}`.text()
                 res.send(createfile)
@@ -50,7 +50,7 @@ app.post('/create', async (req: any, res: { send: (arg0: string) => void }) => {
     try {
         if(sessions.has(req.query.auth)){
             const data1 = req.body.content
-            const data2 = req.body.file
+            const data2 = req.body.name
             const createfile = await $`echo ${data1} > ${req.query.auth}/${data2}`.text()
             res.send(createfile)
         }else{

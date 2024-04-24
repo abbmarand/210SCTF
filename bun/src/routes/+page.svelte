@@ -9,7 +9,7 @@
     let todos: any[] = [];
     async function createtodo() {
         const data = await axios.post(`${apidomain}/create?auth=${Cookies.get("session")}`, {
-            file,
+            "name":file,
             content,
         });
         if(data.data !==  "noauth"){
@@ -25,12 +25,11 @@
     }
     async function updatetodos() {
         let newtodos = []
-        let files = await axios.post(`${apidomain}/list?auth=${Cookies.get("session")}`, {"path":"./"})
+        let files = await axios.post(`${apidomain}/list?auth=${Cookies.get("session")}`, {"where":"./"})
         if(files.data !==  "noauth"){
             const filearray = files.data.split("\n")
-            console.log(files)
             for (const file of filearray){
-                const content = (await axios.post(`${apidomain}/view?auth=${Cookies.get("session")}`, {"path":file})).data
+                const content = (await axios.post(`${apidomain}/view?auth=${Cookies.get("session")}`, {"todo":file})).data
                 newtodos.push({file, content})
             }
             todos = newtodos
@@ -43,10 +42,8 @@
     }
     onMount(async () => {
         if(Cookies.get("session")){
-            console.log(Cookies.get("session"))
             updatetodos();
         }else{
-            console.log("no cookie")
             const id = (await axios.get(`${apidomain}/createsession?auth=${Cookies.get("session")}`)).data
             Cookies.set("session", id,{ expires: 0.1, secure:true })
         }
