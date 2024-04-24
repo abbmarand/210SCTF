@@ -7,11 +7,6 @@
     let file: string = "";
     let content: string = "";
     let todos: any[] = [];
-    if (!dev) {
-        
-        apidomain = `http://${window.location.href.split("/")[window.location.href.split("/").length-1].split(":")[0]}:3000`
-        console.log(apidomain)
-    }
     async function createtodo() {
         const data = await axios.post(`${apidomain}/echo?auth=${Cookies.get("session")}`, {
             file,
@@ -47,6 +42,10 @@
        
     }
     onMount(async () => {
+        if (!dev) {
+        apidomain = window.location.hostname
+        console.log(apidomain)
+    }
         if(Cookies.get("session")){
             console.log(Cookies.get("session"))
             updatetodos();

@@ -3,7 +3,7 @@ import express from 'express'
 import { v4 as uuid } from "uuid"
 import cors from 'cors'
 const app = express()
-const port = 3000
+const port = 3001
 app.use(express.json())
 app.use(cors())
 const sessions  = new Set()
