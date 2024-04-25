@@ -1,11 +1,10 @@
 <script lang="ts">
     import Cookies from 'js-cookie'
     import { onMount } from "svelte";
-    import { dev } from "$app/environment";
     import axios, { AxiosHeaders } from "axios";
     import { Button } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input/index.js";
-    let apidomain = "http://localhost:3001";
+    let apidomain = "https://ctfdb.rustalytics.com";
     let file: string = "";
     let content: string = "";
     let todos: any[] = [];
@@ -56,7 +55,7 @@
 <main class="bg-zinc-950 overflow-auto h-screen text-white flex justify-center ove">
     <div class="mt-14 ">
         <h1 class="text-4xl">The Best todo manager</h1>
-        <p>This todo manager is build with the latest and greatest technologies including the new javascript runtime Bun. <br> Now there is not even a need for a database anymore!<br/>uhm, forgot that you might want to remove them but who cares</p>
+        <p>This todo manager is build with the latest and greatest technologies including the new javascript runtime Bun. <br> Now there is not even a need for a database anymore!<br/>uhm, forgot that you might want to remove them but who cares as they will be gone after 2 hours</p>
         
         <form class="flex w-full max-w-sm items-center space-x-2">
             <Input bind:value={file} type="text" class="text-black" placeholder="name" />
