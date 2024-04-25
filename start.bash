@@ -4,4 +4,4 @@ bun ./build &
 cd /ctfserver/server
 bun index.ts &
 
-exec /bin/bash
+tail -f /dev/null

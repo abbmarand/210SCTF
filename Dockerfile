@@ -7,4 +7,4 @@ COPY ./server /ctfserver/server
 RUN cd /ctfserver/bun && bun run build
 COPY ./start.bash /
 CMD ["bash","/start.bash"]
-#docker build -t ctf . && docker run -d -p 3000:3000 -p 3001:3001 --restart always ctf 
+#docker build -t ctf . && docker run -d -p 3000:3000 -p 3001:3001 ctf 
