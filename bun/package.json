@@ -50,7 +50,13 @@
     "@types/bun": "^1.1.0",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.6.8",
+    "bits-ui": "^0.21.4",
     "bun": "^1.1.3",
-    "js-cookie": "^3.0.5"
+    "clsx": "^2.1.1",
+    "js-cookie": "^3.0.5",
+    "mode-watcher": "^0.3.0",
+    "svelte-sonner": "^0.3.22",
+    "tailwind-merge": "^2.3.0",
+    "tailwind-variants": "^0.2.1"
   }
 }
