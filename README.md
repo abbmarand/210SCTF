@@ -2,7 +2,7 @@
 ### Difficulty: 0.2
 ### available at: https://ctf.rustalytics.com
 
-# How did it go?
+# How did it go developing it?
 The vulnurability I was trying to expose did not work the way I intended. This probably has to do with the [Bun runtime](https://bun.sh/) not excecuting bash the way I thought it would.
 for example:
 
