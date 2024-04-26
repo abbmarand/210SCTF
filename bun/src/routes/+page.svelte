@@ -27,7 +27,7 @@
                 )
             ).data;
             Cookies.set("session", id, { expires: 0.1, secure: true });
-            window.location.href = window.location.href;
+            updatetodos();
         }
     }
     async function updatetodos() {
@@ -55,7 +55,7 @@
                 )
             ).data;
             Cookies.set("session", id, { expires: 0.1, secure: true });
-            window.location.href = window.location.href;
+            updatetodos();
         }
     }
     onMount(async () => {
