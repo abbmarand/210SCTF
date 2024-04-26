@@ -96,7 +96,7 @@
                 class="text-black"
                 placeholder="description"
             />
-            <Button on:click={createtodo} type="submit">Add todo</Button>
+            <Button on:click={createtodo}>Add todo</Button>
         </form>
         <div class="flex flex-col text-white">
             {#each todos as todo}
