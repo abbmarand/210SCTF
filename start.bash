@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /ctfserver/bun
+cd /ctfserver/web
 bun ./build &
 cd /ctfserver/server
 bun index.ts &
