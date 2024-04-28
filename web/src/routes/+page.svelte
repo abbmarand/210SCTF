@@ -79,8 +79,9 @@
         <h1 class="text-4xl">The Best todo manager</h1>
         <p class="my-4">
             This todo manager is build with the latest and greatest technologies
-            including the new javascript runtime Bun. <br /> Now there is not even
-            a need for a database anymore!
+            including the new javascript runtime Bun. <br /> Now there is not
+            even a need for a database anymore! <br /> Might not work in firefox,
+            use Chrome
         </p>
 
         <form class="flex w-full max-w-sm items-center space-x-2">
