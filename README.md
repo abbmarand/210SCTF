@@ -1,5 +1,5 @@
 # Databases are for noobs
-### Difficulty: 0.2
+### Difficulty: 0.6
 ### available at: https://ctf.rustalytics.com
 
 # How did it go developing it?
@@ -11,7 +11,7 @@ for example:
 //Instead it writes the actual string "$(cat /flag.txt)" into the file and not excecuting
 const createfile = await $`echo ${data1} > ${req.query.auth}/${data2}`.text()
 ```
-The difficulty is changed from a 0.4 to a 0.2
+The difficulty is changed from a 0.4 to a 0.6.
 This is because there is not much knowledge about bash required as it is only a path and the auth is exposed in the query params and not in the headers so it is easy to notice
 Now you just have to understand that the "todo" is read is a directory
 # What does the hacker have access to?
